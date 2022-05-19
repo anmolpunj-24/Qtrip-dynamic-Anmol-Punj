@@ -8,6 +8,7 @@ function getCityFromURL(search) {
   var urlParams = new URLSearchParams(search);
   var city = urlParams.get('city');
   return city;
+
 }
 
 //Implementation of fetch call with a paramterized input based on city
@@ -22,6 +23,7 @@ async function fetchAdventures(city) {
   catch (err) {
     return null;
   }
+
 }
 
 //Implementation of DOM manipulation to add adventures for the given city from list of adventures

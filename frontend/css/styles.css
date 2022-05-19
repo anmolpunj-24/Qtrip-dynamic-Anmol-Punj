@@ -7,6 +7,7 @@ body {
   position: relative;
 } 
 
+
 body {
   overflow-y: auto;
   min-height: 100vh;
@@ -50,6 +51,7 @@ footer {
   border-radius: 8px;
   cursor: pointer;
   transition: 0.2s all;
+  -webkit-transition: 0.2s all;
   overflow: hidden;
 
   display: flex;
@@ -62,7 +64,12 @@ footer {
   height: 100%;
   border-radius: 8px;
   transition: 0.2s all;
-  /* -webkit-filter: brightness(70%); */
+  /* filter: brightness(70%); */
+}
+.tile img:hover {
+  filter: brightness(50%);
+  transition: 0.2s all;
+  /* filter: brightness(70%); */
 }
 .tile img:hover {
   filter: brightness(50%);
@@ -119,6 +126,8 @@ footer {
   cursor: pointer;
   transition: 0.2s all;
   
+  -webkit-transition: 0.2s all;
+  overflow: hidden;
 
   display: flex;
   flex-direction: column;
@@ -131,9 +140,14 @@ footer {
   height: 100%;
   /* border-radius: 8px; */
   transition: 0.2s all;
-  /* -webkit-filter: brightness(70%); */
+  /* filter: brightness(70%); */
   display:flex;
   overflow: hidden;
+}
+.activity-card img:hover {
+  filter: brightness(50%);
+  transition: 0.2s all;
+  /* filter: brightness(70%); */
 }
 .activity-card img:hover {
   filter: brightness(50%);
@@ -153,6 +167,11 @@ footer {
   height: 500px;
   width: 100%;
   cursor: pointer;
+  transition: 0.2s all;
+  border-radius: 2px;
+}
+.activity-card-image:hover {
+  filter: brightness(50%);
   transition: 0.2s all;
   border-radius: 2px;
 }
