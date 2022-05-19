@@ -118,12 +118,13 @@ footer {
   border-radius: 8px;
   cursor: pointer;
   transition: 0.2s all;
-  overflow: hidden;
+  
 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  overflow: hidden;
 }
 .activity-card img {
   width: 100%;
@@ -131,6 +132,8 @@ footer {
   /* border-radius: 8px; */
   transition: 0.2s all;
   /* -webkit-filter: brightness(70%); */
+  display:flex;
+  overflow: hidden;
 }
 .activity-card img:hover {
   filter: brightness(50%);
@@ -159,7 +162,7 @@ footer {
 .experience-content ul li {
   margin-left: 16px;
   padding: 0;
-}
+} 
 .filter-bar {
   border-top: 1px solid #999;
   border-bottom: 1px solid #999;

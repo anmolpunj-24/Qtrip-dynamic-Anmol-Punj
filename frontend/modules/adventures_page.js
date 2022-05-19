@@ -37,13 +37,13 @@ function addAdventureToDOM(adventures) {
           <h6>${adventure.category}</h6>
         </div>
         <img class="activity img" src="${adventure.image}" />
-        <div class = "d-flex justify-content-between px-3 pt-3 w-100">
+        <div class = "d-flex justify-content-between  px-1 pt-1 w-100">
           <p style= "font-weight:bold">${adventure.name}</p>
-          <p>₹ ${adventure.costPerHead}</p>
+          <p>₹${adventure.costPerHead}</p>
         </div>
-        <div class = "d-flex justify-content-between px-3 pt-3 w-100">
+        <div class = "d-flex justify-content-between px-1 pt-1 w-100">
           <p style= "font-weight:bold">Duration</p>
-          <p>${adventure.duration} Hours</p>
+          <p>${adventure.duration}Hours</p>
         </div>
       </div>
       </a> 
