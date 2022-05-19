@@ -5,21 +5,51 @@ import config from "../conf/index.js";
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
-
+  var urlParams = new URLSearchParams(search);
+  var city = urlParams.get('city');
+  return city;
 }
 
 //Implementation of fetch call with a paramterized input based on city
 async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
-
+  try {
+    let result = await fetch( config.backendEndpoint + "/adventures" + `/?city=${city}` ).then((response) => response.json());
+        //console.log(response);
+      return result;
+  }
+  catch (err) {
+    return null;
+  }
 }
 
 //Implementation of DOM manipulation to add adventures for the given city from list of adventures
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
-
+  adventures.forEach((adventure) => {
+    let Div = document.createElement("div");
+    Div.className = "col-6 col-lg-3 flex mb-4";
+    Div.innerHTML = `<a id="${adventure.id}"3  href="detail/?adventure=${adventure.id}">
+      <div class ="activity-card">
+        <div class = "category-banner">
+          <h6>${adventure.category}</h6>
+        </div>
+        <img class="activity img" src="${adventure.image}" />
+        <div class = "d-flex justify-content-between px-3 pt-3 w-100">
+          <p style= "font-weight:bold">${adventure.name}</p>
+          <p>₹ ${adventure.costPerHead}</p>
+        </div>
+        <div class = "d-flex justify-content-between px-3 pt-3 w-100">
+          <p style= "font-weight:bold">Duration</p>
+          <p>${adventure.duration} Hours</p>
+        </div>
+      </div>
+      </a> 
+     `;
+    document.getElementById("data").appendChild(Div);
+  });
 }
 
 //Implementation of filtering by duration which takes in a list of adventures, the lower bound and upper bound of duration and returns a filtered list of adventures.
