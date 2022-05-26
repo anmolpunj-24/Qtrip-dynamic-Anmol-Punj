@@ -8,6 +8,7 @@ body {
 }  
 
 
+
 body {
   overflow-y: auto;
   min-height: 100vh;
@@ -70,6 +71,11 @@ footer {
   filter: brightness(50%);
   transition: 0.2s all;
   /* filter: brightness(70%); */
+}
+.tile img:hover {
+  filter: brightness(50%);
+  transition: 0.2s all;
+  /* -webkit-filter: brightness(70%); */
 }
 .tile img:hover {
   filter: brightness(50%);
@@ -151,6 +157,11 @@ footer {
 }
 .activity-card img:hover {
   filter: brightness(50%);
+  transition: 0.2s all;
+  /* -webkit-filter: brightness(70%); */
+}
+.activity-card img:hover {
+  filter: brightness(50%);
   /* transform: scale(1.1); */
 }
 
@@ -167,6 +178,11 @@ footer {
   height: 500px;
   width: 100%;
   cursor: pointer;
+  transition: 0.2s all;
+  border-radius: 2px;
+}
+.activity-card-image:hover {
+  filter: brightness(50%);
   transition: 0.2s all;
   border-radius: 2px;
 }

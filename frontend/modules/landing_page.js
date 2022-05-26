@@ -9,6 +9,7 @@ async function init() {
     addCityToDOM(key.id, key.city, key.description, key.image);
   }); 
   console.log(cities);
+
 }
 
 //Implementation of fetch call
@@ -24,6 +25,7 @@ async function fetchCities() {
        return null;
      }
 }
+
 //Implementation of DOM manipulation to add cities
 function addCityToDOM(id, city, description, image) {
   // TODO: MODULE_CITIES
@@ -43,4 +45,5 @@ function addCityToDOM(id, city, description, image) {
   `;
   document.getElementById("data").appendChild(ele);
 }
+
 export { init, fetchCities, addCityToDOM };

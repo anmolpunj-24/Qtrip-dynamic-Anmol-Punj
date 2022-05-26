@@ -1,6 +1,7 @@
 
 import config from "../conf/index.js";
  
+
 //Implementation to extract city from query params
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
@@ -9,6 +10,7 @@ function getCityFromURL(search) {
   var city = urlParams.get('city');
   return city; 
  
+
 }
 
 //Implementation of fetch call with a paramterized input based on city
@@ -52,6 +54,7 @@ function addAdventureToDOM(adventures) {
      `;
     document.getElementById("data").appendChild(Div);
   }); 
+
 }
 
 //Implementation of filtering by duration which takes in a list of adventures, the lower bound and upper bound of duration and returns a filtered list of adventures.
@@ -60,6 +63,7 @@ function filterByDuration(list, low, high) {
   // 1. Filter adventures based on Duration and return filtered list
   const filterList = list.filter((key) => key.duration >= low && key.duration <= high);
   return filterList;
+
 }
 
 //Implementation of filtering by category which takes in a list of adventures, list of categories to be filtered upon and returns a filtered list of adventures.
@@ -79,7 +83,6 @@ function filterByCategory(list, categoryList) {
   }  
   return filteredList;
 }
-
 
 // filters object looks like this filters = { duration: "", category: [] };
 
@@ -108,6 +111,10 @@ function filterFunction(list, filters) {
     newlist=filterByCategory(newlist,category);
   }
   return newlist;
+
+
+  // Place holder for functionality to work in the Stubs
+  return list;
 }
 
 //Implementation of localStorage API to save filters to local storage. This should get called everytime an onChange() happens in either of filter dropdowns
@@ -115,6 +122,8 @@ function saveFiltersToLocalStorage(filters) {
   // TODO: MODULE_FILTERS
   // 1. Store the filters as a String to localStorage
   return localStorage.setItem('filters', JSON.stringify(filters));
+
+  return true;
 }
 
 //Implementation of localStorage API to get filters from local storage. This should get called whenever the DOM is loaded.
@@ -123,6 +132,10 @@ function getFiltersFromLocalStorage() {
   // 1. Get the filters from localStorage and return String read as an object
   return JSON.parse(localStorage.getItem('filters'));
   // Place holder for functionality to work in the Stubs
+
+
+  // Place holder for functionality to work in the Stubs
+  return null;
 }
 
 //Implementation of DOM manipulation to add the following filters to DOM :
