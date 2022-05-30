@@ -1,10 +1,15 @@
 
 import config from "../conf/index.js";
+ 
 
 //Implementation to extract city from query params
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
+  var urlParams = new URLSearchParams(search); 
+  var city = urlParams.get('city');
+  return city; 
+ 
 
 }
 
@@ -12,6 +17,14 @@ function getCityFromURL(search) {
 async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
+  try {
+    let result = await fetch( config.backendEndpoint + "/adventures" + `/?city=${city}` ).then((response) => response.json());
+        //console.log(response);
+      return result;
+  }
+  catch (err) {
+    return null;
+  }
 
 }
 
@@ -19,6 +32,28 @@ async function fetchAdventures(city) {
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
+  adventures.forEach((adventure) => {
+    let Div = document.createElement("div");
+    Div.className = "col-6 col-lg-3 flex mb-4";
+    Div.innerHTML = `<a id="${adventure.id}"3  href="detail/?adventure=${adventure.id}">
+      <div class ="activity-card">
+        <div class = "category-banner">
+          <h6>${adventure.category}</h6>
+        </div>
+        <img class="activity img" src="${adventure.image}" />
+        <div class = "d-flex justify-content-between  px-1 pt-1 w-100">
+          <p style= "font-weight:bold">${adventure.name}</p>
+          <p>₹ ${adventure.costPerHead}</p>
+        </div>
+        <div class = "d-flex justify-content-between px-1 pt-1 w-100">
+          <p style= "font-weight:bold">Duration</p>
+          <p>${adventure.duration} Hours</p>
+        </div>
+      </div>
+      </a> 
+     `;
+    document.getElementById("data").appendChild(Div);
+  }); 
 
 }
 
@@ -26,6 +61,8 @@ function addAdventureToDOM(adventures) {
 function filterByDuration(list, low, high) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on Duration and return filtered list
+  const filterList = list.filter((key) => key.duration >= low && key.duration <= high);
+  return filterList;
 
 }
 
@@ -33,7 +70,18 @@ function filterByDuration(list, low, high) {
 function filterByCategory(list, categoryList) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on their Category and return filtered list
+  let filteredList = [];
+  if(categoryList.length==0)return list;
 
+  for(let i=0;i<list.length;i++){
+  for(let j=0;j<categoryList.length;j++){
+    if(list[i].category===categoryList[j]){
+      filteredList.push(list[i]);
+      break;
+    }
+  }
+  }  
+  return filteredList;
 }
 
 // filters object looks like this filters = { duration: "", category: [] };
@@ -47,6 +95,22 @@ function filterFunction(list, filters) {
   // TODO: MODULE_FILTERS
   // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
   // 2. Depending on which filters are needed, invoke the filterByDuration() and/or filterByCategory() methods
+  let category=filters.category;
+
+  let newlist=[];
+
+  if(filters.duration.length===0){
+    newlist=filterByCategory(list,category);
+  }
+  else{
+    let arr=filters.duration.split("-");
+    let low = arr[0];
+    let high = arr[1];
+    
+    newlist=filterByDuration(list,low,high);
+    newlist=filterByCategory(newlist,category);
+  }
+  return newlist;
 
 
   // Place holder for functionality to work in the Stubs
@@ -56,7 +120,8 @@ function filterFunction(list, filters) {
 //Implementation of localStorage API to save filters to local storage. This should get called everytime an onChange() happens in either of filter dropdowns
 function saveFiltersToLocalStorage(filters) {
   // TODO: MODULE_FILTERS
-  // 1. Store the filters to localStorage using JSON.stringify()
+  // 1. Store the filters as a String to localStorage
+  return localStorage.setItem('filters', JSON.stringify(filters));
 
   return true;
 }
@@ -64,7 +129,9 @@ function saveFiltersToLocalStorage(filters) {
 //Implementation of localStorage API to get filters from local storage. This should get called whenever the DOM is loaded.
 function getFiltersFromLocalStorage() {
   // TODO: MODULE_FILTERS
-  // 1. Get the filters from localStorage and return in JSON format
+  // 1. Get the filters from localStorage and return String read as an object
+  return JSON.parse(localStorage.getItem('filters'));
+  // Place holder for functionality to work in the Stubs
 
 
   // Place holder for functionality to work in the Stubs
@@ -77,9 +144,19 @@ function getFiltersFromLocalStorage() {
 
 function generateFilterPillsAndUpdateDOM(filters) {
   // TODO: MODULE_FILTERS
-  // 1. Use the filters given as input, update the Duration Filter and Generate Category Pills
+  // 1. Use the filters given as input, update the Duration Filter value and Generate Category Pills
+  const parent = document.getElementById("category-list");
+  filters.category.forEach(element => {
+    const child = document.createElement("div");
+    child.setAttribute('class', 'category-filter');
+    child.innerHTML = `${element}`;
+    parent.append(child);
+  });
 
+  const getDuration=document.getElementById('duration-select');
+  getDuration.value=filters.duration;
 }
+
 export {
   getCityFromURL,
   fetchAdventures,
