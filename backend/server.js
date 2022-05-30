@@ -77,7 +77,7 @@ The response is an [array] of adventures with each having the following structur
     "content": "Random content",
     "available": false,
     "reserved": true,
-    "costPerHead": 4003 
+    "costPerHead": 4003
  }
 Data is sourced from "adventures" array in db.json file
 */
@@ -138,7 +138,6 @@ app.post("/reservations/new", (req, res) => {
     return res.json({ success: true });
   } else {
     return res.status(400).send({
-      message: `Date of booking is incorrect!`,
       message: `Date of booking is incorrect. Can't book for a past date!`,
     });
   }
