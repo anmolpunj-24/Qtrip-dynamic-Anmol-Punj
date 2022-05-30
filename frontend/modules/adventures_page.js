@@ -82,6 +82,7 @@ function filterByCategory(list, categoryList) {
   }
   }  
   return filteredList;
+
 }
 
 // filters object looks like this filters = { duration: "", category: [] };
@@ -112,9 +113,6 @@ function filterFunction(list, filters) {
   }
   return newlist;
 
-
-  // Place holder for functionality to work in the Stubs
-  return list;
 }
 
 //Implementation of localStorage API to save filters to local storage. This should get called everytime an onChange() happens in either of filter dropdowns
@@ -123,7 +121,6 @@ function saveFiltersToLocalStorage(filters) {
   // 1. Store the filters as a String to localStorage
   return localStorage.setItem('filters', JSON.stringify(filters));
 
-  return true;
 }
 
 //Implementation of localStorage API to get filters from local storage. This should get called whenever the DOM is loaded.
@@ -131,11 +128,7 @@ function getFiltersFromLocalStorage() {
   // TODO: MODULE_FILTERS
   // 1. Get the filters from localStorage and return String read as an object
   return JSON.parse(localStorage.getItem('filters'));
-  // Place holder for functionality to work in the Stubs
-
-
-  // Place holder for functionality to work in the Stubs
-  return null;
+ 
 }
 
 //Implementation of DOM manipulation to add the following filters to DOM :
