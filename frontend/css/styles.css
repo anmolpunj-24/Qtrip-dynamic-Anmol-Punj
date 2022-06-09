@@ -1,4 +1,4 @@
-* {
+* { 
   margin: 0px;
   padding: 0px;
 }
@@ -81,7 +81,7 @@ footer {
     url("https://images.pexels.com/photos/2422461/pexels-photo-2422461.jpeg?cs=srgb&dl=pexels-josh-hild-2422461.jpg&fm=jpg");
 
   /* Set a specific height */
-  height: 50vh;
+  height: 51vh;
   width: 100vw;
   /* Position and center the image to scale nicely on all screens */
   background-position: center;
