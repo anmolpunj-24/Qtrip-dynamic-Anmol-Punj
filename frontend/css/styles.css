@@ -5,7 +5,9 @@
 html,
 body {
   position: relative;
-}
+}  
+
+
 
 body {
   overflow-y: auto;
@@ -124,6 +126,7 @@ footer {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  overflow: hidden;
 }
 .activity-card img {
   width: 100%;
@@ -159,7 +162,7 @@ footer {
 .experience-content ul li {
   margin-left: 16px;
   padding: 0;
-}
+} 
 .filter-bar {
   border-top: 1px solid #999;
   border-bottom: 1px solid #999;

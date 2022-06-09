@@ -1,4 +1,4 @@
-import {
+ import {
   getCityFromURL,
   fetchAdventures,
   addAdventureToDOM,
@@ -8,7 +8,8 @@ import {
   saveFiltersToLocalStorage,
   getFiltersFromLocalStorage,
   generateFilterPillsAndUpdateDOM
-} from "../../modules/adventures_page.js";
+} 
+from "../../modules/adventures_page.js";
 
 require("jest-fetch-mock").enableMocks();
 
