@@ -11,7 +11,9 @@ specifiers:
   jest-fetch-mock: ^3.0.3
   jest-junit: ^11.1.0
   jquery: ^3.5.1
+  source-map-resolve: ^0.6.0
   typescript: ^3.2.1
+  urix: ^0.1.0
 
 dependencies:
   '@babel/core': 7.17.12
@@ -23,7 +25,9 @@ dependencies:
   jest-fetch-mock: 3.0.3
   jest-junit: 11.1.0
   jquery: 3.6.0
+  source-map-resolve: 0.6.0
   typescript: 3.9.10
+  urix: 0.1.0
 
 devDependencies:
   '@babel/plugin-transform-modules-commonjs': 7.17.12_@babel+core@7.17.12
@@ -2095,7 +2099,7 @@ packages:
     dev: false
 
   /decode-uri-component/0.2.0:
-    resolution: {integrity: sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=}
+    resolution: {integrity: sha512-hjf+xovcEn31w/EUYdTXQh/8smFL/dzYjohQGEIgjyNavaJfBY2p5F527Bo1VPATxv0VYTUC2bOcXvqFwk78Og==}
     engines: {node: '>=0.10'}
     dev: false
 
@@ -4156,6 +4160,14 @@ packages:
       resolve-url: 0.2.1
       source-map-url: 0.4.1
       urix: 0.1.0
+    dev: false
+
+  /source-map-resolve/0.6.0:
+    resolution: {integrity: sha512-KXBr9d/fO/bWo97NXsPIAW1bFSBOuCnjbNTBMO7N59hsv5i9yzRDfcYwwt0l04+VqnKC+EwzvJZIP/qkuMgR/w==}
+    deprecated: See https://github.com/lydell/source-map-resolve#deprecated
+    dependencies:
+      atob: 2.1.2
+      decode-uri-component: 0.2.0
     dev: false
 
   /source-map-support/0.5.21:

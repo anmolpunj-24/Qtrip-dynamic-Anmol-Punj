@@ -7,7 +7,7 @@ function getAdventureIdFromURL(search) {
   var urlParams = new URLSearchParams(search); 
   var adventureId = urlParams.get('adventure');
   return adventureId; 
-} 
+}   
 //Implementation of fetch call with a paramterized input based on adventure ID
 async function fetchAdventureDetails(adventureId) {
   // TODO: MODULE_ADVENTURE_DETAILS
@@ -52,31 +52,30 @@ function addBootstrapPhotoGallery(images) {
   // TODO: MODULE_ADVENTURE_DETAILS
   // 1. Add the bootstrap carousel to show the Adventure images
   document.getElementById("photo-gallery").innerHTML = `<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <div class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </div>
-    <div class="carousel-inner" id="carousel-inner">
-
-    </div>
-    <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+  </ol>
+  <div class="carousel-inner" id="carousel-inner">
+   
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
-  </button>
+  </a>
 </div>`;
+
   images.map((image, idx) => {
     let ele = document.createElement("div");
     ele.className = `carousel-item ${idx === 2 ? "active" : ""}`;
     ele.innerHTML = `
     <img
         src=${image}
-        alt=""
-        srcset=""
         class="activity-card-image pb-3 pb-md-0"
       />
           `;
@@ -89,14 +88,29 @@ function addBootstrapPhotoGallery(images) {
 function conditionalRenderingOfReservationPanel(adventure) {
   // TODO: MODULE_RESERVATIONS
   // 1. If the adventure is already reserved, display the sold-out message.
-  
+   
+  if(adventure.available){
+    document.getElementById('reservation-panel-sold-out').style.display = "none";
+    document.getElementById('reservation-panel-available').style.display = "block";
+
+
+    const getPerHeadCost=document.getElementById('reservation-person-cost');
+    getPerHeadCost.innerHTML=`${adventure.costPerHead}`;
+  }
+  else{
+    document.getElementById('reservation-panel-available').style.display = "none";
+    document.getElementById('reservation-panel-sold-out').style.display = "block";
+
+  }
 }
 
 //Implementation of reservation cost calculation based on persons
 function calculateReservationCostAndUpdateDOM(adventure, persons) {
   // TODO: MODULE_RESERVATIONS
   // 1. Calculate the cost based on number of persons and update the reservation-cost field
-
+  const totalCost=persons*adventure.costPerHead;
+  const reservationCost=document.getElementById('reservation-cost')
+  reservationCost.innerHTML=totalCost;
 }
 
 //Implementation of reservation form submission
@@ -104,13 +118,51 @@ function captureFormSubmit(adventure) {
   // TODO: MODULE_RESERVATIONS
   // 1. Capture the query details and make a POST API call using fetch() to make the reservation
   // 2. If the reservation is successful, show an alert with "Success!" and refresh the page. If the reservation fails, just show an alert with "Failed!".
+  const form = document.getElementById("myForm");
+  
+  form.addEventListener("submit", async (event)=>{
+    event.preventDefault();
+    let url = config.backendEndpoint + "/reservations/new";
+
+    let formElements = form.Element;
+    let payload ={
+      name:formElements.element["name"].value.trim(),
+      date:formElements.element["date"].value,
+      person:formElements.element["person"].value,
+      adventure:adventure.id,
+    }
+    try{
+      const res = fetch (url,{
+        method:"POST",
+        body:JSON.stringify(payload),
+        headers:{
+          "Content-type":"application/json"
+        }
+      });
+      if(res.ok){
+        alert("Success");
+        location.reload();
+      }else{
+        alert("Failed")
+      }
+    }
+    catch(e){
+      alert("Failed-to-load")
+    }
+  })
 }
 
 //Implementation of success banner after reservation
 function showBannerIfAlreadyReserved(adventure) {
   // TODO: MODULE_RESERVATIONS
   // 1. If user has already reserved this adventure, show the reserved-banner, else don't
-
+  const getBanner = document.getElementById("reserved-banner")
+  if(adventure.reserved){
+    getBanner.style.display="block";
+  }
+  else{
+    getBanner.style.display="none";
+  }
 }
 
 export {

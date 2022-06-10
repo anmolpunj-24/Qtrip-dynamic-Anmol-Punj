@@ -4,7 +4,14 @@ import config from "../conf/index.js";
 async function fetchReservations() {
   // TODO: MODULE_RESERVATIONS
   // 1. Fetch Reservations by invoking the REST API and return them
-  
+  try{
+    const res = await fetch(config.backend+"/reservations/");
+    const data = await res.json();
+    return data;
+  }
+  catch(e){
+    return null;
+  }
 
   // Place holder for functionality to work in the Stubs
   return null; 
@@ -15,6 +22,14 @@ function addReservationToTable(reservations) {
   // TODO: MODULE_RESERVATIONS
   // 1. Add the Reservations to the HTML DOM so that they show up in the table
 
+  if(reservations.length){
+    document.getElementById('no-reservation-banner').style.display="none";
+    document.getElementById('reservation-table-parent').style.display="block";
+  }
+  else{
+    document.getElementById('no-reservation-banner').style.display="block"
+    document.getElementById('reservation-table-parent').style.display="none"
+  }
   //Conditionally render the no-reservation-banner and reservation-table-parent
 
   /*
@@ -25,7 +40,25 @@ function addReservationToTable(reservations) {
     1. The date of adventure booking should appear in the format D/MM/YYYY (en-IN format) Example:  4/11/2020 denotes 4th November, 2020
     2. The booking time should appear in a format like 4 November 2020, 9:32:31 pm
   */
-
+ const reservationTable=document.getElementById("reservation-tble")
+  reservations.map((key)=>{
+    let newElem = document.createElement("tr");
+    newElem.innerHTML=`
+    <th>${key.id}</th>
+    <td>${key.name}</td>
+    <td>${key.adventureName}</td>
+    <td>${key.person}</td>
+    <td>${key.date}</td>
+    <td>${key.price}</td>
+    <td>${key.time}</td>
+    <td>
+      <div class="reservation-visit-button" id=${key.id}>
+      <a href="../detail?adventure=${key.adventure}">Visit Adventure</a>
+      </div>
+    </td>
+    `
+    reservationTable.append(newElem);
+  });
 }
 
 export { fetchReservations, addReservationToTable };
