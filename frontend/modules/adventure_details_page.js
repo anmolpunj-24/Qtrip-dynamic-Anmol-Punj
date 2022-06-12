@@ -108,48 +108,52 @@ function conditionalRenderingOfReservationPanel(adventure) {
 function calculateReservationCostAndUpdateDOM(adventure, persons) {
   // TODO: MODULE_RESERVATIONS
   // 1. Calculate the cost based on number of persons and update the reservation-cost field
-  const totalCost=persons*adventure.costPerHead;
-  const reservationCost=document.getElementById('reservation-cost')
-  reservationCost.innerHTML=totalCost;
+  document.getElementById("reservation-cost").innerHTML =
+    persons * adventure.costPerHead;
+
+  console.log(persons * adventure.costPerHead)
+
 }
 
 //Implementation of reservation form submission
 function captureFormSubmit(adventure) {
-  // TODO: MODULE_RESERVATIONS
-  // 1. Capture the query details and make a POST API call using fetch() to make the reservation
-  // 2. If the reservation is successful, show an alert with "Success!" and refresh the page. If the reservation fails, just show an alert with "Failed!".
   const form = document.getElementById("myForm");
-  
-  form.addEventListener("submit", async (event)=>{
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     let url = config.backendEndpoint + "/reservations/new";
 
-    let formElements = form.Element;
-    let payload ={
-      name:formElements.element["name"].value.trim(),
-      date:formElements.element["date"].value,
-      person:formElements.element["person"].value,
-      adventure:adventure.id,
-    }
-    try{
-      const res = fetch (url,{
-        method:"POST",
-        body:JSON.stringify(payload),
-        headers:{
-          "Content-type":"application/json"
-        }
+    let formElements = form.elements;
+
+    let bodyString = JSON.stringify({
+      name: formElements["name"].value,
+      date: formElements["date"].value,
+      person: formElements["person"].value,
+      adventure: adventure.id,
+    });
+
+    try {
+      let res = await fetch(url, {
+        method: "POST",
+        body: bodyString,
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
-      if(res.ok){
-        alert("Success");
-        location.reload();
-      }else{
-        alert("Failed")
+
+      debugger;
+      if (res.ok) {
+        alert("Success!");
+        window.location.reload();
+      } else {
+        let data = await res.json();
+        alert(`Failed - ${data.message}`);
       }
+    } catch (err) {
+      console.log(err);
+      alert("Failed - fetch call resulted in error");
     }
-    catch(e){
-      alert("Failed-to-load")
-    }
-  })
+  });
+
 }
 
 //Implementation of success banner after reservation

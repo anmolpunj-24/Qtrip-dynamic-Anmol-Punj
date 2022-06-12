@@ -74,7 +74,7 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <input type="number" class="form-control" min="1" max="10" value="0"
+                                        <input type="number" class="form-control" min="1" max="12" value="0"
                                             name="person" required onkeyup="onPersonsChange(event)"
                                             style="width: 100px" />
                                     </div>
@@ -127,7 +127,7 @@
             addAdventureDetailsToDOM(adventureDetails);
             addBootstrapPhotoGallery(adventureDetails.images);
             conditionalRenderingOfReservationPanel(adventureDetails);
-            captureFormSubmitUsingJQuery(adventureDetails);
+            captureFormSubmit(adventureDetails);
             showBannerIfAlreadyReserved(adventureDetails);
             function onPersonsChange(event) {
                 calculateReservationCostAndUpdateDOM(
